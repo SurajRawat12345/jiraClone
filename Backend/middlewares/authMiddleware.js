@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import UserModel from "../models/userModel.js";
 
 export const authenticateToken = (req, res, next) => {
     const authHeader = req.headers["authorization"];
@@ -10,4 +11,12 @@ export const authenticateToken = (req, res, next) => {
       req.user = user;
       next();
     });
+};
+
+export const isAdmin = async(req, res, next) => {
+    console.log(req.user);
+    const user = await UserModel.findById(req.user._id);
+    console.log(user);
+    if (user.role !== "admin") return res.sendStatus(403);
+    next();
 };
