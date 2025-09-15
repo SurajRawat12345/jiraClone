@@ -1,9 +1,13 @@
 import express from "express";
-import { createProjectController } from "../controllers/projectController.js";
-import { authenticateToken } from "../middlewares/authMiddleware.js";
+import { createProjectController, getProjectsController } from "../controllers/projectController.js";
+import { authenticateToken, isAdmin } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
-router.post("/create",authenticateToken, createProjectController);
+// Protected route for creating project
+router.post("/create", authenticateToken, isAdmin, createProjectController);
+
+// Protected route for getting all projects
+router.get("/get-all", authenticateToken, getProjectsController);
 
 export default router;
