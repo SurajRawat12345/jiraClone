@@ -17,9 +17,9 @@ export const comparePassword = async(password,hashedPassword) => {
 }
 
 export const generateAccessToken = async(user) => {
-  return jwt.sign(user, process.env.ACCESS_SECRET, { expiresIn: "15m" });
+  return jwt.sign(user, process.env.ACCESS_SECRET, { expiresIn: "7d" });
 };
 
 export const generateRefreshToken = async(user) => {
-  return jwt.sign(user, process.env.REFRESH_SECRET, { expiresIn: "7d" });
+  return jwt.sign(user, process.env.REFRESH_SECRET, { expiresIn: "10d" });
 };
